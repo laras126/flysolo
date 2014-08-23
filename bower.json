@@ -1,0 +1,9 @@
+{
+  "name": "flysolo",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.0",
+    "bourbon": "3.2.3",
+    "neat": "1.5.1"
+  }
+}
