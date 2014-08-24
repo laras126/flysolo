@@ -5,7 +5,7 @@
 	border: 2px solid darken( $button-color, 10% );
 	
 	@extend .h3;
-	@extend %form-base;
+	@extend .form-base;
 	color: $text-color;
 
 	@if $full==true {
@@ -35,7 +35,7 @@
 	}
 }
 
-%form-base {
+.form-base {
 	border-radius: 3px;
 	padding: $sml/2 $base/2;
 	margin-bottom: $sml;

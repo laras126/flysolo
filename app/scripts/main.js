@@ -1,19 +1,19 @@
 $(document).ready(function() {
 
-	var latitude, longitude;
+	// var latitude, longitude;
 
-	if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(searchFoursquare);
-    } else { 
-        $('#userLocation').html('Geolocation is not supported by this browser.');
-    }
+// 	if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(searchFoursquare);
+//     } else { 
+//         $('#userLocation').html('Geolocation is not supported by this browser.');
+//     }
 
-});
+// });
 
-function searchFoursquare(position) {
+// function searchFoursquare(position) {
 
-	var latitude = position.coords.latitude;
-	var longitude = position.coords.longitude;
+	// var latitude = position.coords.latitude;
+	// var longitude = position.coords.longitude;
 
 	// Add FourSquare authentication and what not
 	// Add the 'query' value from the form
@@ -66,4 +66,6 @@ function searchFoursquare(position) {
 	
 	});
 
-}
+});
+
+// }
