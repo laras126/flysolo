@@ -14,31 +14,38 @@ function searchFoursquare(position) {
 
 	var latitude = position.coords.latitude;
 	var longitude = position.coords.longitude;
-    
-    // This is probably not the correct way to do this
-	var query_val = $('#flySoloForm').serialize() + $('#queryInput').val();
 
 	// Add FourSquare authentication and what not
-	// Get the users lat/lon
 	// Add the 'query' value from the form
     var fsq_data = { 
 		client_id: 'CKSDM1KYCKKBSXJUFZWW2PWB0YZRN0FPMQIRX0IL2UWHMCPW',
 		client_secret: 'IH3SNJ2GDP4M5OLESLWW5D23BV35TMNCUNOX3BES4RQ1O4GD',
-		v: '20130815',
-		ll: latitude+','+longitude,
-		query: query_val
+		v: '20140806',
+		// section: 'drinks',
+		limit: 10,
+		intent: 'browse',
+		// ll: latitude+','+longitude
 	};
 
-	var fsq_encoded = $.param(fsq_data);	
+	// Put the JSON into a string
+	var fsq_encoded = $.param(fsq_data);
 
+	$('#flySoloForm').submit( function(event) {
 
-	$('#flySoloForm').submit( function( event ) {
+		// I feel that I shouldn't need to have the & there...
+		var form_data =  '&' + $('#flySoloForm').serialize();
 
-		console.log(fsq_encoded);
+		// Clear the list
+		$('.items').children().remove();
+		
+		// Check the query
+		console.log(fsq_encoded + form_data);
+		
+		// Request info from Foursquare
 		$.ajax({
 			url: 'https://api.foursquare.com/v2/venues/search',
 			method: 'GET',
-			data: fsq_encoded,
+			data: fsq_encoded + form_data,
 		})
 		.done( function(data) {
 			console.log(data);
@@ -48,12 +55,15 @@ function searchFoursquare(position) {
 				var title = val.name;
 				$('.items').append('<li>' + title + '</li>');
 			} );
+		})
+		.fail( function(error) {
+			$('.items').append('<li>' + error + '</li>');
 		});
-	
+		
+		$('#form-status').html('Here are some options!');
+		
 		return false;
 	
 	});
-
-	$('#userLocation').html('Latitude: ' + latitude + '<br>Longitude: ' + longitude);
 
 }
