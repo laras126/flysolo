@@ -1,8 +1,13 @@
 // Put your grids and layout stuff here
 
-// I like http://jeet.gs for a super simple semantic grid
+// Neat-o!
 
-// Example:
-// .sidebar {
-	// @include col(1/4);
-// }
+$max-width: 	$screen-sm/2;
+
+.app-content {
+	@include outer-container;	
+}
+
+form * {
+	@include fill-parent;
+}

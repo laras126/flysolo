@@ -21,17 +21,17 @@
         <![endif]-->
 
 
-        <div class="hero-unit">
+        <main class="app-content" role="main">
         
             <h1>flysolo.in</h1>
-            <form action="">
-                <input type="text" name="near">
-                <input type="text" name="query">
+            <form id="flySoloForm" method="post">
+                <input id="queryInput" type="text" placeholder="poop">
                 <input type="Submit" value="Go!">
             </form>
+            <p id="userLocation">Getting your location...</p>
             <ul class="items"></ul>
         
-        </div>
+        </main>
 
 
         <!-- build:js scripts/vendor.js -->

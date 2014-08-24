@@ -9,7 +9,6 @@ label, select {
 }
 
 label {
-	// font-weight: 300;
 	margin-top: $h3;
 }
 
@@ -44,13 +43,11 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 input[type="tel"] {
-	padding: $sml/2 $base/2;
+	@extend %form-base;
 	background: $vlight-accent;
 	color: $main-font;
 	border: 2px solid $light-accent;
-	line-height: 1.5em;
 	font-family: $sans-serif;
-	font-weight: 300;
 
 	&:focus {
 		border-color: $med-accent;
@@ -61,7 +58,7 @@ input[type="tel"] {
 input[type="radio"],
 input[type="checkbox"] {
 	margin: 4px 0 0;
-	margin-top: 1px \9;
+	margin-top: 1px;
 	*margin-top: 0;
 	line-height: normal;
 	cursor: pointer;
@@ -79,7 +76,7 @@ input[type="checkbox"] {
 
 input[type="submit"],
 button {
-	@include button($dark-accent, $white);
+	@include button($full: true);
 	@extend .h3;
 	cursor: pointer;
 	-webkit-appearance: none;
