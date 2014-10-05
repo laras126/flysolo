@@ -1,55 +1,94 @@
+// Much inspired by this tutorial from Blueprint Interactive:
+// http://blueprintinteractive.com/blog/html5-geolocation-venue-search-powered-foursquare-and-retina-maps
+
 'use strict';
 
-$(document).ready(function() {
+$(function() {
+	
+	// Set up some variables
+	var lat = '';
+    var lng = '';
+	var results = '';
+	var str = '';
+	var newstr = '';
+	var phone = '';
+	var rating = '';
+	var icon = '';
+	var address = '';
 
-	// Add FourSquare authentication and what not
-	// Add the 'query' value from the form
-    var fsqData = {
-		client_id: 'CKSDM1KYCKKBSXJUFZWW2PWB0YZRN0FPMQIRX0IL2UWHMCPW',
-		client_secret: 'IH3SNJ2GDP4M5OLESLWW5D23BV35TMNCUNOX3BES4RQ1O4GD',
-		v: '20140806',
-		// section: 'drinks',
-		limit: 10,
-		intent: 'browse',
-		// ll: latitude+','+longitude
-	};
+	var loader = '<div class="spinner"></div>';
 
-	// Put the JSON into a string
-	var fsqEncoded = $.param(fsqData);
-
+    // When the form is submitted
 	$('#flySoloForm').submit( function() {
 
-		// I feel that I shouldn't need to have the & there...
-		var formData =  '&' + $('#flySoloForm').serialize();
+		// Clear the form and show the loader
+		$('#venues').html(loader);
 
-		// Clear the list
-		$('.items').children().remove();
+		// Prevent default form functionality
+		event.preventDefault();
 
-		// Check the query
-		console.log(fsqEncoded + formData);
+		// Do we have the location yet?
+		// If no, get the location
+		if (!lat) {
+			navigator.geolocation.getCurrentPosition(getLocation);
+		// If yes i.e. the form has already been submitted once, go ahead and get the Foursquare venues
+		} else {
+			getVenues();
+		}
+	});
+
+	function getLocation(position) {
+		// Get latitude and longitude
+  		lat = position.coords.latitude;
+  		lng = position.coords.longitude;
+
+  		console.log(lat + ', ' + lng);
+  		// Get the FourSquare venues
+		getVenues();
+	}
+
+	function getVenues() {
 
 		// Request info from Foursquare
 		$.ajax({
-			url: 'https://api.foursquare.com/v2/venues/search',
-			method: 'GET',
-			data: fsqEncoded + formData,
-		})
-		.done( function(data) {
-			console.log(data);
-			var places = data.response.venues;
-			$.each( places, function(key,val) {
-				var title = val.name;
-				$('.items').append('<li>' + title + '</li>');
-			} );
-		})
-		.fail( function(error) {
-			$('.items').append('<li>' + error + '</li>');
+			type: 'GET',
+	  		url: 'https://api.foursquare.com/v2/venues/explore?ll='+lat+','+lng+'&limit=5&client_id=CKSDM1KYCKKBSXJUFZWW2PWB0YZRN0FPMQIRX0IL2UWHMCPW&client_secret=IH3SNJ2GDP4M5OLESLWW5D23BV35TMNCUNOX3BES4RQ1O4GD&v=20140619&query='+$('#query').val(),
+
+	  		// If the request is successful:
+			success: function(data) {
+				
+				$("#venues").html('');
+
+				var places = data.response.groups[0].items;
+				
+				$.each( places, function() {
+					
+					var phone = '';
+
+					if (this.venue.contact.formattedPhone) {
+						phone = "Phone:"+this.venue.contact.formattedPhone;
+						// console.log(phone);
+					} else {
+						phone = '';
+					}
+
+					if (this.venue.location.address) {
+						address = '<p class="subinfo">'+this.venue.location.address+'<br>';
+					} else {
+						address = '';
+					}
+					
+					if (this.venue.rating) {
+						rating = '<span class="rating">'+this.venue.rating+'</span>';
+					}
+					
+					results = '<li class="venue"><h2><span>'+this.venue.name+'</h2>'+address+phone+rating+'</p></li>';
+					
+					$("#venues").append(results);
+
+				});
+			}
 		});
-
-		$('#form-status').html('Here are some options!');
-
-		return false;
-
-	});
+	}
 
 });
