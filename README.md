@@ -13,7 +13,7 @@ It would have really cute URLs:
 
 Bare in mind none of that exists yet (other than a purchased domain), and probably won't for a while.
 
-#### Things I am learning with this project:
+### Things I am learning with this project
 
 * Angular (despite the progressive enhancement buzz, I still want to learn it)
 * Foursquare API (big time thanks to [Carl Colombo's  angular-foursquare repo](https://github.com/carlo-colombo/angular-foursquare))
@@ -21,7 +21,7 @@ Bare in mind none of that exists yet (other than a purchased domain), and probab
 * Geolocation
 * Yoeman and Bower and Grunt and complicated build stuff
 
-#### To-do
+### Todos
 
 Ultimately (or at least what I'm thinking at the moment), this will allow a user to:
 
