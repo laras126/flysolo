@@ -1,0 +1,62 @@
+App description:
+Sometimes I like go to bars alone, in other words fly solo. But not all bars are great for flying solo - maybe they are too crowded or completely overrun with couples. Fly Solo is simply a listing of some good ones.
+
+Or check in at a bar
+	And say what you did there
+	What you drank
+	Over all how was it?
+
+Bar
+	Name
+	Location
+		City name
+		Address
+	Foursquare
+		Link to page
+		Rating
+	Type of bar (select)
+	Rating (1-5)
+	Why it's a good bar for solo
+	-- OR
+		What you did at the bar
+			Read
+			Looked at phone
+			Chat with bartender
+			Chatted with fellow patron
+			Eat
+			Other
+
+=========
+
+Users can type in URL to see a list of bars in their city
+	City determined by URL (flysolo.in/nyc)
+	BONUS: bars ordered by location
+
+Users can see a list of cards with the following:
+	Name
+	Address linking to directions
+	Type of bar/drinks
+		Icon determined by type of bar
+	Rating on Foursquare
+		Link to see it on foursquare
+	Like/dislike
+
+Users can add a bar
+	Type the name
+	Select a type of bar
+	Say why it is good for solo
+
+User can click a link to it on foursquare
+
+========
+
+BONUS:
+
+List nearby bars based on Foursquare
+Users can agree or disagree with a bar
+Users can check in at a bar
+
+
+=========
+
+Another option would be to just pull bars from foursquare period. and not even have people add them, it would just be an aggre
